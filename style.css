@@ -1,3 +1,9 @@
+
+.about-me{
+    text-align: right;
+}
+
+
 .container2{
     
     background-color:white;
@@ -25,7 +31,7 @@
 }
 .container3{
     background-color:white;
-    height:500px;
+    height:600px;
     width: 600px;
     float:left;
     text-align: left;

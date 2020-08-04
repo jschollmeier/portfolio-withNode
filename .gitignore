@@ -3,3 +3,4 @@ node_modules
 
 sendgrid.env
 node_modules
+package-lock.json

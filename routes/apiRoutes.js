@@ -1,44 +1,52 @@
-"use strict";
-const nodemailer = require("nodemailer");
 
-require('dotenv').config();
 
-// async..await is not allowed in global scope, must use a wrapper
-//sendMessage:(name, email, message) => 
+
+const sgMail = require('@sendgrid/mail');
+const { response } = require('express');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+
    module.exports = function(app)
        {
-  // Generate test SMTP service account from ethereal.email
-  // Only needed if you don't have a real mail account for testing
   
+  app.post("/api/email", function(req, res){
+    
+    
 
-  // create reusable transporter object using the default SMTP transport
-  app.post("/api/email", async function(req, res){
-  let transporter = nodemailer.createTransport({
-    service: "Gmail",
-    secure: true, // true for 465, false for other ports
-    auth: {
-      user: process.env.email, // generated ethereal user
-      pass: process.env.password, // generated ethereal password
-    },
-    tls: {
-        rejectUnauthorized: false
+    // using Twilio SendGrid's v3 Node.js Library
+// https://github.com/sendgrid/sendgrid-nodejs
+
+
+const msg = {
+  to: 'jschollmeier@gmail.com',
+  from: 'basketballsuperstar55@gmail.com',
+  subject: 'New Portfolio Contact form Message From: ' +req.body.name,
+  text: req.body.message + " \n\n\n from: " +req.body.email,
+  
+};
+sgMail
+  .send(msg)
+  .then(() => {
+    
+  })
+  .catch(error => {
+    // Log friendly error
+    console.error(error);
+
+    if (error.response) {
+      // Extract error msg
+      const {message, code, response} = error;
+
+      // Extract response msg
+      const {headers, body} = response;
+
+      console.error(body);
     }
   });
-
-  // send mail with defined transport object
-  let info = await transporter.sendMail({
-    from: 'Portfolio Contact Form <basketballsuperstar55@gmail.com>' , // sender address '"Me 👻" <someotheremail@gmail.com>'
-    to: "jschollmeier@gmail.com", // list of receivers
-    subject: req.body.name, // Subject line
-    text: req.body.message +"\n\n\nfrom: "+ req.body.email, // plain text body
-    html: req.body.message, // html body
-  });
-
-  console.log("Message sent: %s", info.messageId);
-  res.json(info.messageId)
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
+  res.json(msg);
 }) 
 
 }
+
+
 

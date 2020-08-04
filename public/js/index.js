@@ -24,6 +24,7 @@ $.post("/api/email", {
 
 })
 .catch(function(err){
+    console.log("error happening");
     console.log(err);
 });
 

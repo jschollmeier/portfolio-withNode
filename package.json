@@ -1,0 +1,25 @@
+{
+  "name": "responsive-portfolio",
+  "version": "1.0.0",
+  "description": "This is a webpage that showcases applications I have been involved in allowing potential employers and colleagues to look into what I have created.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jschollmeier/Responsive-Portfolio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jschollmeier/Responsive-Portfolio/issues"
+  },
+  "homepage": "https://github.com/jschollmeier/Responsive-Portfolio#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nodemailer": "^6.4.11",
+    "path": "^0.12.7"
+  }
+}
